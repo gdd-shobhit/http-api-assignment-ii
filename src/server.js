@@ -9,17 +9,31 @@ const jsonHandler = require('./jsonResponses.js');
 
 const port = process.env.PORT || process.env.NODE_PORT || 3000;
 
+// const urlStruct = {
+//   'GET': {
+//     '/': htmlHandler.getIndex,
+//     '/style.css': htmlHandler.getCSS,
+//     '/getUsers': jsonHandler.getUsers,
+//     '/updateUser': jsonHandler.updateUser,
+//     notFound: jsonHandler.notFound,
+//   },
+//   'HEAD': {
+//     '/getUsers': jsonHandler.getUsersMeta,
+//     notFound: jsonHandler.getUsersMeta,
+//   },
+//   'POST':{
+//     '/addUsers':handlePost
+//   }
+// };
+
 //handle POST requests
 const handlePost = (request, response, parsedUrl) => {
   //if post is to /addUser (our only POST url)
   if (parsedUrl.pathname === '/addUser') {
     const res = response;
 
-    //uploads come in as a byte stream that we need 
-    //to reassemble once it's all arrived
     const body = [];
 
-    //if the upload stream errors out, just throw a
     //a bad request and send it back 
     request.on('error', (err) => {
       console.dir(err);
@@ -70,7 +84,7 @@ const onRequest = (request, response) => {
   //for the sake of this example
   if (request.method === 'POST') {
     handlePost(request, response, parsedUrl);
-  } else {
+  } else{
     handleGet(request, response, parsedUrl);
   }
 };

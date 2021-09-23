@@ -1,4 +1,3 @@
-   
 const fs = require('fs'); // pull in the file system module
 
 const css = fs.readFileSync(`${__dirname}/../client/style.css`);
